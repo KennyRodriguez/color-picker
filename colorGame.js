@@ -1,31 +1,41 @@
-var colors = [
-  "rgb(255, 0, 0)",
-  "rgb(255, 255, 0)",
-  "rgb(0, 255, 0)",
-  "rgb(0, 255, 255)",
-  "rgb(0, 0, 255)",
-  "rgb(255, 0, 255)"
-]
+let colors = [];
+let squares = document.querySelectorAll(".squares");
 
-var pickedColor = colors[3];
+let gameWon = false;
+let colorDisplay = document.getElementById("colorDisplay");
+let rColorOne;
+let rColorTwo;
+let rColorThree;
 
-var colorDisplay = document.getElementById("colorDisplay");
+for(let sCount = 0; sCount < squares.length; sCount++)
+{
+  rColorOne = Math.floor((Math.random() * 255) +1);
+  rColorTwo = Math.floor((Math.random() * 255) +1);
+  rColorThree = Math.floor((Math.random() * 255) +1);
+  colors[sCount] = `rgb(${rColorOne}, ${rColorTwo}, ${rColorThree})`;
+}
+
+let pickedColor = colors[Math.floor((Math.random() * colors.length)+0)];
+
 colorDisplay.textContent = pickedColor;
 
-//Grab Squares
-var squares = document.querySelectorAll(".squares");
-//Assign Squares colors
-for (var i = 0; i < squares.length; i++) {
-  // add colors
-  squares[i].style.backgroundColor = colors[i];
-  //add events
-  squares[i].addEventListener("click", function(){
-    //(This current Square)
-    var clickedColor = this.style.backgroundColor;
-    if(clickedColor === pickedColor){
-      alert("Correct! :D");
-    }else{
-      alert("Incorrect :(")
+
+  //Assign Squares colors
+  for (let i = 0; i < squares.length; i++) {
+    // add colors
+    squares[i].style.backgroundColor = colors[i];
+    //add events
+    squares[i].addEventListener("click", function(){
+      //(This current Square)
+      let clickedColor = this.style.backgroundColor;
+      console.log("Clicked Color:"+clickedColor);
+      console.log(pickedColor);
+      if(clickedColor === pickedColor){
+        alert("Correct! :D");
+        
+      }else{
+        alert("Incorrect :(")
     }
   });
 }
+
